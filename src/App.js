@@ -41,11 +41,15 @@ const App = () => {
       <Container
         component="main"
         maxWidth="xs"
-        sx={{ height: '100vh', position: 'relative' }}
+        sx={{ maxHeight: '100vh', position: 'relative' }}
       >
         <Suspense fallback={<div> </div>}>
-          <Header />
-          {isLoggedIn && <AppBar />}
+          {isLoggedIn && (
+            <>
+              <Header />
+              <AppBar />
+            </>
+          )}
 
           {!isFetchingUser && (
             <Switch>

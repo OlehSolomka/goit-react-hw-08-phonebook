@@ -14,6 +14,7 @@ const UserMenuPage = () => {
   const handleLogOut = () => {
     dispatch(authOperations.logOut());
     dispatch(contactActions.clearContacts([]));
+    dispatch(contactActions.clearFavContacts());
   };
 
   return (

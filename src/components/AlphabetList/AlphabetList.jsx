@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useMemo } from 'react';
 import ContactList from 'components/Contactlist';
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
@@ -6,18 +7,17 @@ import ListItem from '@mui/material/ListItem';
 import ListSubheader from '@mui/material/ListSubheader';
 
 export default function AlphabetList({ contacts, onDelete }) {
-  function mapContactLettes() {
+  const contactLetters = useMemo(() => {
     return contacts.map(contact => contact.name[0].toUpperCase());
-  }
+  }, [contacts]);
 
-  const sortedUniqueLetters = Array.from(new Set(mapContactLettes())).sort();
+  const sortedUniqueLetters = Array.from(new Set(contactLetters)).sort();
 
   return (
     <>
       <Grid item xs={12} md="auto">
         <List
           sx={{
-            position: 'relative',
             overflow: 'auto',
             '& ul': { padding: 0 },
           }}
@@ -27,15 +27,18 @@ export default function AlphabetList({ contacts, onDelete }) {
               <ListItem
                 key={letter}
                 sx={{
+                  justifyContent: 'space-between',
                   alignItems: 'flex-start',
                 }}
               >
                 <ListSubheader
                   component="div"
                   sx={{
-                    display: 'inline-block',
                     zIndex: '0',
                     paddingTop: 0.5,
+                    width: '38px',
+                    paddingLeft: '12px',
+                    paddingRight: '12px',
                   }}
                 >
                   {letter}

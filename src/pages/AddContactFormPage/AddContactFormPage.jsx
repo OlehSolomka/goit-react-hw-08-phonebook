@@ -1,6 +1,7 @@
 import { contactOperations, contactSelectors } from 'redux/contacts';
 import { useDispatch, useSelector } from 'react-redux';
-// import { LoadingButton } from '@mui/lab';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,6 +14,13 @@ import Container from '@mui/material/Container';
 export default function AddContactFormPage() {
   const contacts = useSelector(contactSelectors.getContacts);
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  useEffect(() => {
+    return () => {
+      dispatch(contactOperations.getContacts());
+    };
+  }, [dispatch]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -32,6 +40,7 @@ export default function AddContactFormPage() {
     dispatch(contactOperations.addContact(contactItem));
 
     e.currentTarget.reset();
+    history.goBack();
   };
 
   return (

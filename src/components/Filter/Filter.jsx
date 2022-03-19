@@ -1,9 +1,12 @@
 import TextFieldControll from './TextFieldControll.js';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { contactSelectors } from 'redux/contacts';
 
 const Filter = ({ getQuery, visibleContacts }) => {
+  const contacts = useSelector(contactSelectors.getContacts);
   const helperTextRequire = !visibleContacts.length;
-
+  const helperTextNewUser = contacts.length === 0;
   const handleChange = e => {
     getQuery(e.target.value);
   };
@@ -21,6 +24,7 @@ const Filter = ({ getQuery, visibleContacts }) => {
         size="small"
         fullWidth
         helperTextRequire={helperTextRequire}
+        helperTextNewUser={helperTextNewUser}
       />
     </>
   );

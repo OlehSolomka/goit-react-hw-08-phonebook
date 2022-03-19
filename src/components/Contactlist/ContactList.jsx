@@ -1,6 +1,5 @@
 import { contactActions, contactSelectors } from 'redux/contacts';
 import { useDispatch, useSelector } from 'react-redux';
-import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -34,56 +33,55 @@ const Contactlist = ({ contacts, onDelete, letter }) => {
   };
 
   return (
-    <Grid item xs={12} md="auto">
-      <List
-        sx={{
-          textTransform: 'capitalize',
-        }}
-      >
-        {contacts.map((unit, index) => {
-          if (letter === unit.name[0].toUpperCase()) {
-            return (
-              <ListItem
-                key={unit.id}
-                sx={{
-                  justifyContent: 'space-between',
-                  paddingLeft: 1,
-                  paddingRight: 6,
-                  paddingTop: 0.5,
-                  paddingBottom: 0.5,
-                }}
-                secondaryAction={
-                  <IconButton
-                    edge="end"
-                    aria-label="delete"
-                    onClick={() => {
-                      onDelete(unit.id);
-                    }}
-                  >
-                    <DeleteForeverIcon color="primary" />
-                  </IconButton>
-                }
-              >
-                <Checkbox
-                  edge="start"
-                  checked={idArray.includes(unit.id)}
-                  icon={<StarBorderIcon />}
-                  checkedIcon={<StarIcon />}
-                  onClick={e => handleClick(index, e, unit.id)}
-                />
-                <ListItemText primary={unit.name} />
-                <ListItemText
-                  primary={unit.number}
-                  sx={{
-                    textAlign: 'right',
+    <List
+      sx={{
+        textTransform: 'capitalize',
+        width: 'inherit',
+      }}
+    >
+      {contacts.map((unit, index) => {
+        if (letter === unit.name[0].toUpperCase()) {
+          return (
+            <ListItem
+              key={unit.id}
+              sx={{
+                justifyContent: 'space-between',
+                paddingLeft: 1,
+                paddingRight: 6,
+                paddingTop: 0.5,
+                paddingBottom: 0.5,
+              }}
+              secondaryAction={
+                <IconButton
+                  edge="end"
+                  aria-label="delete"
+                  onClick={() => {
+                    onDelete(unit.id);
                   }}
-                />
-              </ListItem>
-            );
-          }
-        })}
-      </List>
-    </Grid>
+                >
+                  <DeleteForeverIcon color="primary" />
+                </IconButton>
+              }
+            >
+              <Checkbox
+                edge="start"
+                checked={idArray.includes(unit.id)}
+                icon={<StarBorderIcon />}
+                checkedIcon={<StarIcon />}
+                onClick={e => handleClick(index, e, unit.id)}
+              />
+              <ListItemText primary={unit.name} />
+              <ListItemText
+                primary={unit.number}
+                sx={{
+                  textAlign: 'right',
+                }}
+              />
+            </ListItem>
+          );
+        }
+      })}
+    </List>
   );
 };
 

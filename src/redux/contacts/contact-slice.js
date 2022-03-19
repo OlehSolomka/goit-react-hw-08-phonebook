@@ -4,6 +4,7 @@ import {
   clearContacts,
   setFavContacts,
   deletefavContacts,
+  clearFavContacts,
 } from './contact-actions';
 
 const initialState = {
@@ -41,6 +42,9 @@ const contactSlice = createSlice({
       state.favContacts = state.favContacts.filter(
         unit => unit.id !== action.payload
       );
+    },
+    [clearFavContacts]: state => {
+      state.favContacts = [];
     },
   },
 });
